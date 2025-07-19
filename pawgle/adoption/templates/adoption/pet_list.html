@@ -1,0 +1,31 @@
+{% extends 'adoption/base.html' %}
+{% block title %}All Pets{% endblock %}
+{% block main-content %}
+<div class="container py-5">
+  <h4 class="text-center text-warning mb-5">All Pets Available for Adoption</h4>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+    {% for pet in pets|slice:":15" %}
+      <div class="col">
+        <div class="card shadow-sm pet-card h-100">
+          <img src="{{ pet.image.url }}" class="card-img-top" alt="{{ pet.name }}">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div>
+              <h5 class="card-title text-primary">{{ pet.name }}</h5>
+              <p class="card-text small text-muted">{{ pet.species|capfirst }} - {{ pet.gender|capfirst }}</p>
+              <p class="card-text">{{ pet.description|truncatechars:80 }}</p>
+            </div>
+            <div class="mt-3 d-flex justify-content-between">
+              <a href="{% url 'pet_detail' pet.pk %}" class="btn btn-sm btn-outline-info">View</a>
+             
+              <a href="{% url 'adopt_pet' pet.pk %}" class="btn btn-sm btn-success">Adopt</a>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-center text-muted">No pets available right now.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

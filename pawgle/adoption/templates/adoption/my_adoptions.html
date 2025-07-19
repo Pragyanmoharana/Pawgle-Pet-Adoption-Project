@@ -1,0 +1,25 @@
+{% extends 'adoption/base.html' %}
+{% block main-content %}
+<div class="container mt-4">
+  <h2 class="mb-4">🐾 My Adoption Requests</h2>
+  {% for req in requests %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Pet: {{ req.pet.name }}</h5>
+        <p><strong>Status:</strong> {{ req.status }}</p>
+        <p><strong>Submitted:</strong> {{ req.submitted_at|date:"M d, Y H:i" }}</p>
+        <p><strong>Reason:</strong> {{ req.reason }}</p>
+        <p><strong>Family Members:</strong> {{ req.family_members }}</p>
+        <p><strong>Address:</strong> {{ req.address }}</p>
+        <p><strong>Contact:</strong> {{ req.contact_number }}</p>
+        <p><strong>Previous Pet:</strong> {{ req.previous_pet|yesno:"Yes,No" }}</p>
+        {% if req.status == "Pending" %}
+          <a href="{% url 'cancel_adoption' req.pk %}" class="btn btn-danger btn-sm">Cancel Request</a>
+        {% endif %}
+      </div>
+    </div>
+  {% empty %}
+    <p>No adoption requests yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

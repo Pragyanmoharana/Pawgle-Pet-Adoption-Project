@@ -1,0 +1,76 @@
+{% extends 'adoption/base.html' %}
+{% load static %}
+
+{% block title %}Donate a Pet{% endblock title %}
+
+{% block main-content %}
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="text-center mb-4">🐾 Donate a Pet</h2>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <div class="card shadow">
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+              <label for="id_name" class="form-label">Pet Name</label>
+              {{ form.name }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_pet_type" class="form-label">Pet Type</label>
+              {{ form.pet_type }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_breed" class="form-label">Breed</label>
+              {{ form.breed }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_age" class="form-label">Age</label>
+              {{ form.age }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_gender" class="form-label">Gender</label>
+              {{ form.gender }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_description" class="form-label">Description</label>
+              {{ form.description }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_image" class="form-label">Pet Image</label>
+              {{ form.image }}
+            </div>
+
+            <div class="mb-3">
+              <label for="id_contact" class="form-label">Contact Number</label>
+              {{ form.contact }}
+            </div>
+
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-success">Submit Donation</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

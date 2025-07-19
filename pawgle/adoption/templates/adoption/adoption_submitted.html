@@ -1,0 +1,9 @@
+{% extends 'adoption/base.html' %}
+{% block main-content %}
+<div class="container text-center mt-5">
+  <h2>Your adoption request has been submitted! 🐾</h2>
+  <img src="https://media.giphy.com/media/5xtDarzq5pMRcVgAGPq/giphy.gif" alt="submitted gif" class="img-fluid mt-3">
+  <br><br>
+  <a href="{% url 'my_adoptions' %}" class="btn btn-primary mt-3">View My Requests</a>
+</div>
+{% endblock %}

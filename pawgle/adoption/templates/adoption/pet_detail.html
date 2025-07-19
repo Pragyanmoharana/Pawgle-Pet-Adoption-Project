@@ -1,0 +1,28 @@
+{% extends 'adoption/base.html' %}
+{% load static %}
+{% block title %}Pet Details{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5">
+  <div class="card shadow">
+    <div class="row g-0">
+      <div class="col-md-5">
+        <img src="{{ pet.image.url }}" class="img-fluid rounded-start" alt="{{ pet.name }}">
+      </div>
+      <div class="col-md-7">
+        <div class="card-body">
+          <h3 class="card-title">{{ pet.name }}</h3>
+          <p class="card-text"><strong>Species:</strong> {{ pet.species }}</p>
+          <p class="card-text"><strong>Breed:</strong> {{ pet.breed }}</p>
+          <p class="card-text"><strong>Gender:</strong> {{ pet.gender }}</p>
+          <p class="card-text"><strong>Age:</strong> {{ pet.age }} years</p>
+          <p class="card-text"><strong>Description:</strong> {{ pet.description }}</p>
+          <hr>
+          <a href="{% url 'adopt_pet' pet.pk %}" class="btn btn-success">Adopt This Pet</a>
+          <a href="{% url 'home' %}" class="btn btn-secondary ms-2">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

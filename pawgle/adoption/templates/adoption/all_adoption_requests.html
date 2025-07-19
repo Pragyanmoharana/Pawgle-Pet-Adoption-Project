@@ -1,0 +1,27 @@
+{% extends 'adoption/base.html' %}
+{% block main-content %}
+<div class="container mt-4">
+  <h2>All Adoption Requests (Admin View)</h2>
+  {% for req in requests %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5>{{ req.user.username }} wants to adopt {{ req.pet.name }}</h5>
+        <p><strong>Contact:</strong> {{ req.contact_number }}</p>
+        <p><strong>Status:</strong> <span class="badge bg-info">{{ req.status }}</span></p>
+        <p><strong>Reason:</strong> {{ req.reason }}</p>
+        <form method="post" action="{% url 'update_adoption_status' req.pk %}">
+          {% csrf_token %}
+          <select name="status" class="form-select mb-2">
+            <option value="Pending" {% if req.status == "Pending" %}selected{% endif %}>Pending</option>
+            <option value="Approved">Approve</option>
+            <option value="Rejected">Reject</option>
+          </select>
+          <button class="btn btn-primary btn-sm" type="submit">Update</button>
+        </form>
+      </div>
+    </div>
+  {% empty %}
+    <p>No requests submitted yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'adoption/base.html' %}
+{% load static %}
+{% block title %}About{% endblock title %}
+
+ {% block main-content %}
+ 
+  <main class="d-flex align-items-center justify-content-center">
+    <section class="container py-5">
+      <!-- About Us Title -->
+      <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary">About Us</h1>
+        <p class="text-muted fs-5">Learn who we are, what we do, and how we help pets and people connect every day.</p>
+      </div>
+
+      <!-- Mission, Vision, and Values -->
+      <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+          <img src="{% static 'adoption/images/about.png' %}"" class="img-fluid rounded shadow-sm" alt="Happy pet adoption" />
+        </div>
+        <div class="col-md-6">
+          <h2 class="fw-bold text-primary">Our Mission</h2>
+          <p class="text-muted">We aim to provide a free, safe, and loving platform for pet adoption, helping pets find their forever homes and owners find loyal companions.</p>
+
+          <h2 class="fw-bold text-primary mt-4">Our Vision</h2>
+          <p class="text-muted">To build a world where no pet goes homeless, and every pet lover can adopt or rehome responsibly with trust and ease.</p>
+
+          <h2 class="fw-bold text-primary mt-4">Our Values</h2>
+          <p class="text-muted">We stand for compassion, community, transparency, and care — for animals and people alike.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="mt-5">
+        <h2 class="fw-bold text-primary text-center mb-4">Frequently Asked Questions</h2>
+        <div class="accordion" id="faqAccordion">
+          <!-- FAQ 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq1">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#answer1" aria-expanded="true">
+                How does Pet Place work?
+              </button>
+            </h2>
+            <div id="answer1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Users can sign up, post pets for adoption, browse available pets, and directly connect with owners or adopters securely.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq2">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#answer2">
+                Is your service free?
+              </button>
+            </h2>
+            <div id="answer2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Absolutely. Pet Place is 100% free for both adopters and pet owners. Our goal is to remove financial barriers to finding a loving home.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="faq3">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#answer3">
+                What kinds of pets can I list?
+              </button>
+            </h2>
+            <div id="answer3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Dogs, cats, rabbits, birds, reptiles — if it's a pet, it’s welcome! We support all responsible rehoming of domesticated pets.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terms & Conditions -->
+      <section class="mt-5">
+        <h2 class="fw-bold text-primary text-center mb-4">Terms & Conditions</h2>
+        <ul class="text-muted">
+          <li>
+            <strong>Use of the Platform</strong>
+            <p>By using Pet Place, you agree to our terms and conditions. You are responsible for the accuracy of your listings and respectful interactions.</p>
+          </li>
+          <li>
+            <strong>Privacy</strong>
+            <p>We care about your privacy. We do not share personal data without your consent, and uploaded pet images are visible to other users.</p>
+          </li>
+          <li>
+            <strong>Content Ownership</strong>
+            <p>You retain ownership of your uploaded content, but grant us the right to use it to operate the platform effectively.</p>
+          </li>
+          <li>
+            <strong>Prohibited Use</strong>
+            <ul>
+              <li>No abusive or illegal content.</li>
+              <li>No spamming or harassment of users.</li>
+              <li>No fraudulent pet listings or scams.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Changes to Terms</strong>
+            <p>We may update these terms from time to time. Continued use implies acceptance of any updates.</p>
+          </li>
+          <li>
+            <strong>Contact Us</strong>
+            <p>Have questions? Reach us at <a href="mailto:pragyanbmoharana@gmail.com">pragyanbmoharana@gmail.com</a></p>
+          </li>
+        </ul>
+      </section>
+    </section>
+  </main>
+
+ {% endblock main-content %}

@@ -1,0 +1,187 @@
+{% extends 'adoption/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+ {% block main-content %}
+ <header id="home">
+  <div class="section__container header__container">
+    <div class="header__content">
+      <h4>Welcome to</h4>
+      <h1><span>Pet Adoption</span></h1>
+      <h2>Find your furry friend a forever home</h2>
+      <p>
+        Discover lovable pets waiting to be adopted, or donate a pet in need. We’re here to help every pet find love, care, and a family.
+      </p>
+      
+    </div>
+    <div class="header__image">
+      <img
+        src="{% static 'adoption/images/header-bg.png' %}"
+        alt="header-bg"
+        class="header__image-bg"
+      />
+      <img src="{% static 'adoption/images/header.png' %}" alt="header" />
+    </div>
+  </div>
+  <div class="header__bottom"></div>
+</header>
+
+  {% endblock main-content %}
+
+
+
+    {% block petfilter %} 
+    
+<div class="container py-5">
+  <div class="row">
+    <!-- Filter Section -->
+    <div class="col-md-3">
+      <h4 class="text-center text-warning">Filter</h4>
+      <form method="get" class="bg-light p-3 rounded shadow-sm">
+        <div class="mb-3">
+          <label class="form-label">Species</label>
+          <select name="species" class="form-select border-warning">
+            <option value="">All</option>
+            <option value="dog" {% if request.GET.species == "dog" %}selected{% endif %}>Dog</option>
+            <option value="cat" {% if request.GET.species == "cat" %}selected{% endif %}>Cat</option>
+            <option value="parrot" {% if request.GET.species == "parrot" %}selected{% endif %}>Parrot</option>
+            <option value="rabbit" {% if request.GET.species == "rabbit" %}selected{% endif %}>Rabbit</option>
+            <option value="other" {% if request.GET.species == "other" %}selected{% endif %}>Other</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Gender</label>
+          <select name="gender" class="form-select">
+            <option value="">Choose gender</option>
+            <option value="male" {% if request.GET.gender == "male" %}selected{% endif %}>Male</option>
+            <option value="female" {% if request.GET.gender == "female" %}selected{% endif %}>Female</option>
+          </select>
+        </div>
+        <div class="d-flex gap-2">
+          <a href="{% url 'home' %}" class="btn btn-outline-secondary w-50">Reset</a>
+          <button type="submit" class="btn btn-warning w-50">Search</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Pets Display Section -->
+    <div class="col-md-9">
+      <h4 class="text-center text-warning mb-4">Pets</h4>
+      <div class="row">
+        {% if pets %}
+          {% for pet in pets %}
+            <div class="col-md-6 mb-4">
+              <div class="card shadow-sm">
+                <img src="{{ pet.image.url }}" class="card-img-top" alt="{{ pet.name }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ pet.name }}</h5>
+                  <p class="card-text">{{ pet.description|truncatechars:100 }}</p>
+                  <p class="text-muted">{{ pet.species }} - {{ pet.gender }}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="text-center text-muted">Loading pets...</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    {% endblock petfilter %}
+
+{% block services %}
+<section class="py-5 bg-white">
+  <div class="container">
+    <p class="text-muted text-center fw-medium">What We Offer</p>
+    <h2 class="text-center fw-semibold mb-5" style="color: #3f3b57;">Our Core Services</h2>
+
+    <div class="row g-4 text-center justify-content-center">
+      <!-- Adopt a Pet -->
+      <div class="col-md-5">
+        <div class="p-4 rounded h-100 shadow-sm">
+          <div class="mb-3">
+            <div class="bg-light rounded-circle d-inline-block p-4" style="background-image: url('{% static 'adoption/images/adopt-bg.png' %}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+              <img src="{% static 'adoption/images/3775023.jpg' %}" alt="Adopt a Pet" style="height: 75px;">
+            </div>
+          </div>
+          <h4 class="fw-semibold" style="color: #3f3b57;">Adopt a Pet</h4>
+          <p style="color: #908ca3;">Browse and adopt loving pets looking for a forever home. Make a difference in a pet's life today.</p>
+          <a href="{% url 'pet_list' %}" class="btn btn-outline-primary rounded-pill px-4">View Pets</a>
+        </div>
+      </div>
+
+      <!-- Donate a Pet -->
+      <div class="col-md-5">
+        <div class="p-4 rounded h-100 shadow-sm">
+          <div class="mb-3">
+            <div class="bg-light rounded-circle d-inline-block p-4" style="background-image: url('{% static 'adoption/images/donate-bg.png' %}'); background-size: contain; background-repeat: no-repeat; background-position: center;">
+              <img src="{% static 'adoption/images/intro-1.png' %}" alt="Donate a Pet" style="height: 75px;">
+            </div>
+          </div>
+          <h4 class="fw-semibold" style="color: #3f3b57;">Donate a Pet</h4>
+          <p style="color: #908ca3;">Can’t care for your pet anymore? Help them find a new family by submitting them for adoption.</p>
+          <a href="{% url 'donate_pet' %}" class="btn btn-outline-warning rounded-pill px-4">Donate Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+ {% endblock services %}
+{% block feedback %}
+<section class="client">
+  <div class="section__container client__container">
+    <p class="section__subheader">Feedback</p>
+    <h2 class="section__header">What our adopters say</h2>
+    <div class="client__row">
+      <div class="client__card">
+        <div class="client__details">
+          <img src="{% static 'adoption/images/about-1.jpg' %}" alt="client" />
+          <div>
+            <h4>Rohan Sharma</h4>
+            <h5>Pet Lover</h5>
+          </div>
+        </div>
+        <p>
+          Adopting my dog from Pawgle was a beautiful experience. The process was smooth, and the team helped me at every step.
+        </p>
+      </div>
+
+      <div class="client__card">
+        <div class="client__details">
+          <img src="{% static 'adoption/images/client-2.jpg' %}" alt="client" />
+          <div>
+            <h4>Arjun Mehta</h4>
+            <h5>Volunteer</h5>
+          </div>
+        </div>
+        <p>
+          I’ve volunteered and adopted through Pawgle. The way they care for animals and match them with families is heartwarming.
+        </p>
+      </div>
+
+      <div class="client__card">
+        <div class="client__details">
+          <img src="{% static 'adoption/images/client-3.jpg' %}" alt="client" />
+          <div>
+            <h4>Neha Verma</h4>
+            <h5>Animal Rescuer</h5>
+          </div>
+        </div>
+        <p>
+          Pawgle connected me with a family for a rescued pup. Knowing she’s now safe and happy gives me peace.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock feedback %}
+ 

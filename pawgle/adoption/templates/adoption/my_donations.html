@@ -1,0 +1,106 @@
+{% extends 'adoption/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+ {% block main-content %}
+<style>
+  .page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #343a40;
+    margin: 40px 0 30px;
+    text-align: center;
+  }
+
+  .pet-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out;
+    height: 100%;
+  }
+
+  .pet-card:hover {
+    transform: scale(1.01);
+  }
+
+  .pet-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-right: 1px solid #eee;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .approved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  .no-donations {
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.1rem;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .pet-img {
+      height: 250px;
+      border-right: none;
+      border-bottom: 1px solid #eee;
+    }
+  }
+</style>
+
+<div class="container">
+  <h2 class="page-title">🐶 My Pet Donations</h2>
+
+  {% for pet in donations %}
+    <div class="card mb-4 pet-card">
+      <div class="row g-0 align-items-stretch">
+        <div class="col-md-4">
+          <div style="height: 100%; overflow: hidden;">
+            <img src="{{ pet.image.url }}" alt="{{ pet.name }}" class="pet-img">
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body d-flex flex-column justify-content-between h-100">
+            <div>
+              <h5 class="card-title">{{ pet.name }}</h5>
+              <p class="mb-1"><strong>Breed:</strong> {{ pet.breed }}</p>
+              <p class="mb-1"><strong>Age:</strong> {{ pet.age }} year(s)</p>
+              <p class="mb-1"><strong>Gender:</strong> {{ pet.gender }}</p>
+              <p class="mb-2"><strong>Description:</strong> {{ pet.description }}</p>
+            </div>
+            <div>
+              <strong>Status:</strong>
+              {% if pet.is_converted %}
+                <span class="status-badge approved">Approved</span>
+              {% else %}
+                <span class="status-badge pending">Pending Approval</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p class="no-donations">😿 You have not donated any pets yet.</p>
+  {% endfor %}
+</div>
+
+ {% endblock main-content%}
